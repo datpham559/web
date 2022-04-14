@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Categories page')">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div th:replace="navigation :: menu ">
+		</div>
+		<div>
+		<h2>Manage Categories</h2>	
+		
+		<a th:href="@{/categories/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/categories/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		</div>
+		<div th:replace="fragments :: search_form_and_message" ></div>
+		<br>
+		<div>
+			<table class="table table-bordered table-striped table-hover table-responsive-xl">
+				<thead class="thead-dark"> 
+					<tr>
+						<th> ID </th>
+						<th> Category Image </th>
+						<th> Category Name </th>
+						<th> Alias </th>
+						<th> Enabled </th>
+						<th> Action </th>
+					 </tr>
+				</thead>
+				<tbody >
+					<tr th:each="category : ${listCategories}">
+						<td>[[${category.id}]] </td>
+						<td><img th:src="@{${category.imagePath}}" style="width: 100px" class="img-fluid"/></td>
+						<td>[[${category.name}]] </td>
+						<td>[[${category.alias}]] </td>
+						<td><i class="fas fa-circle fa-2x icon-silver"></i> </td>
+						<td> <a class="fas fa-trash fa-2x icon-silver" title="Delete the user" th:href="@{/categories/delete/}+${category.id}"> 
+						</a> &nbsp;
+						 <a class="fas fa-edit fa-2x icon-blue" title="Edit the user" th:href="@{/categories/edit/}+${category.id}"> </a>
+						 </td>
+					 </tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:replace="fragments :: footer">
+		</div>
+	</div>
+</body>
+</html>
